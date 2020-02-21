@@ -94,9 +94,25 @@ class SortingRobot:
 
     def sort(self):
         """
-        Sort the robot's list.
+        Sort the robot's list using bubble sort.
         """
-        # Fill this out
+        while True:
+            while self.can_move_left():
+                self.move_left()
+            self.set_light_off()
+            while self.can_move_right():
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.set_light_on()
+                    self.swap_item()
+                    self.move_left()
+                elif self.compare_item() in [-1, 0]:
+                    self.move_left()
+                self.swap_item()
+                self.move_right()
+            if not self.light_is_on():
+                return
         pass
 
 
