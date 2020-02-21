@@ -92,9 +92,10 @@ class SortingRobot:
         """
         return self._light == "ON"
 
-    def sort(self):
+    def slower_sort(self):
         """
         Sort the robot's list using bubble sort.
+        This was my first solution.
         """
         while True:
             while self.can_move_left():
@@ -113,7 +114,30 @@ class SortingRobot:
                 self.move_right()
             if not self.light_is_on():
                 return
-        pass
+
+    def sort(self):
+        """
+        Sort the robot's list using insertion sort.
+        Second, faster solution fast enough to pass the stretch goal.
+        """
+        self.move_right()
+        self.swap_item()
+        while True:
+            while self.can_move_left():
+                self.move_left()
+            while self.can_move_right() and self.compare_item() != None:
+                if self.compare_item() in [0, -1]:
+                    self.swap_item()
+                self.move_right()
+            if not self.can_move_right() and self.compare_item() == None:
+                self.swap_item()
+                return
+            self.swap_item()
+            self.move_right()
+            self.swap_item()
+
+
+
 
 
 if __name__ == "__main__":
